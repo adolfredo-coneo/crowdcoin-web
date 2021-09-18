@@ -1,0 +1,19 @@
+//cra
+yarn create react-app crowdcoin-web --template typescript
+
+//web3
+yarn add web3
+
+//ganache-cli
+yarn add ganache-cli
+yarn add --dev @types/ganache-cli
+
+//mocha
+yarn add mocha
+yarn add --dev @types/mocha
+
+//solc
+yarn add solc
+
+//@truffle/hdwallet-provider
+yarn add @truffle/hdwallet-provider
