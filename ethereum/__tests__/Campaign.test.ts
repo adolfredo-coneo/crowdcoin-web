@@ -2,8 +2,8 @@ const ganache = require('ganache-cli');
 const assert = require('assert');
 const Web3 = require('web3');
 //const { beforeEach, describe, it } = require('mocha');
-const compiledFactory = require('../build/CompaignFactory.json');
-const compiledCampaign = require('../build/Compaign.json');
+const compiledFactory = require('../../src/ethereum/build/CompaignFactory.json');
+const compiledCampaign = require('../../src/ethereum/build/Compaign.json');
 const { AbiItem } = require('web3-utils');
 
 const web3 = new Web3(ganache.provider());

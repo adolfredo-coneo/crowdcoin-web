@@ -2,7 +2,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const util = require('util');
 
 const Web3 = require('web3');
-const compiledFactory = require('./build/CompaignFactory.json');
+const compiledFactory = require('../src/ethereum/build/CompaignFactory.json');
 
 const provider = new HDWalletProvider(
   'wing need merry leaf pull vast faith acid three fork pencil ladder',

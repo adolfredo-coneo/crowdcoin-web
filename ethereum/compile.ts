@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const solc = require('solc');
 
-const buildPath = path.resolve(__dirname, 'build');
+const buildPath = path.resolve(__dirname, '../src/ethereum/build');
 fs.removeSync(buildPath);
 
 const campaignPath = path.resolve(__dirname, 'contracts', 'Campaign.sol');
