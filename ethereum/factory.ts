@@ -4,7 +4,7 @@ const compiledFactory = require('./build/CompaignFactory.json');
 
 const instance = new web3.eth.Contract(
   compiledFactory.abi,
-  '0x1e7241e29140f1bD6f0c4b63495C72FC083F689E'
+  '0x7E73D76C96041aA21d3c3407A3CB4708f768E40C'
 );
 
 export default instance;

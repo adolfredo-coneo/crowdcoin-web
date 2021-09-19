@@ -1,6 +1,6 @@
 const ganache = require('ganache-cli');
-const assert = require('assert');;
-const Web3  = require('web3');
+const assert = require('assert');
+const Web3 = require('web3');
 //const { beforeEach, describe, it } = require('mocha');
 const compiledFactory = require('../build/CompaignFactory.json');
 const compiledCampaign = require('../build/Compaign.json');
@@ -21,11 +21,11 @@ beforeEach(async () => {
 
   factory = await new web3.eth.Contract(factoryAbi)
     .deploy({ data: bytecode })
-    .send({ from: accounts[0], gas: 5000000 });
+    .send({ from: accounts[0], gas: 6500000 });
 
   await factory.methods.createCampaign('100').send({
     from: accounts[0],
-    gas: '1000000',
+    gas: '5000000',
   });
 
   [campaignAddress] = await factory.methods.getDeployedCampaigns().call();
@@ -66,6 +66,11 @@ describe('Campaigns', () => {
   });
 
   it('allows a manager to make a payment request', async () => {
+    await campaign.methods.contribute().send({
+      value: '200',
+      from: accounts[1],
+    });
+
     await campaign.methods
       .createRequest('Buy batteries', '100', accounts[1])
       .send({
@@ -123,4 +128,3 @@ describe('Campaigns', () => {
     assert(balance > 104);
   });
 });
-

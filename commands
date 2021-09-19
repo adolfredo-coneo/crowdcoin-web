@@ -17,3 +17,12 @@ yarn add solc
 
 //@truffle/hdwallet-provider
 yarn add @truffle/hdwallet-provider
+
+
+//GIT
+git init
+git add .
+git commit -m "Initializing Repo"
+git branch -M main
+git remote add origin https://github.com/adolfredo-coneo/crowdcoin-web.git
+git push -u origin main
