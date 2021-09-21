@@ -1,3 +1,4 @@
+require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const util = require('util');
 
@@ -5,8 +6,8 @@ const Web3 = require('web3');
 const compiledFactory = require('../src/ethereum/build/CompaignFactory.json');
 
 const provider = new HDWalletProvider(
-  'wing need merry leaf pull vast faith acid three fork pencil ladder',
-  'https://rinkeby.infura.io/v3/e9bb66d58efe477391d2f091b46c1602'
+  process.env.REACT_APP_WALLET_KEY,
+  process.env.REACT_APP_RINKEBY_ENDPOINT
 );
 
 const web3 = new Web3(provider);

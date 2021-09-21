@@ -18,6 +18,12 @@ yarn add solc
 //@truffle/hdwallet-provider
 yarn add @truffle/hdwallet-provider
 
+//dotenv
+yarn add --dev dotenv
+
+//semantic-ui-react
+yarn add semantic-ui-react semantic-ui-css
+
 
 //GIT
 git init
