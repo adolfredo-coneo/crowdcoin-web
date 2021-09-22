@@ -32,3 +32,5 @@ git commit -m "Initializing Repo"
 git branch -M main
 git remote add origin https://github.com/adolfredo-coneo/crowdcoin-web.git
 git push -u origin main
+
+cd crowdcoin-web

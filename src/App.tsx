@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import IndexPage from './pages/IndexPage';
+import IndexPageWithLayout from './pages/IndexPage';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <IndexPage />
+      <header className="App-header1">
+        <IndexPageWithLayout />
       </header>
     </div>
   );
