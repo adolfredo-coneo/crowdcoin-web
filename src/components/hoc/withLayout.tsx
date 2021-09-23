@@ -1,15 +1,16 @@
 import React from 'react';
+import { Container } from 'semantic-ui-react';
 //import PropTypes from 'prop-types';
 
-import Header from '../Header';
+import Header from '../Header/Header';
 
 const withLayout = (WrappedComponent: React.FC) => {
   const withLayout = ({ ...props }) => (
-    <div>
+    <Container>
       <Header />
       <WrappedComponent {...props} />
       <div>Im a Footer</div>
-    </div>
+    </Container>
   );
 
   //withLayout.propTypes = {};

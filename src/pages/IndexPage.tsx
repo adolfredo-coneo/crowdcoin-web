@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import factory from '../ethereum/factory';
 import CampaignList from '../components/CampaignList';
@@ -10,6 +11,7 @@ interface Props {}
 
 const IndexPage = (props: Props) => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
     const getCampaigns = async () => {
@@ -28,12 +30,16 @@ const IndexPage = (props: Props) => {
     getCampaigns();
   }, []);
 
+  const handleAddCampaign = () => {
+    history.push(`/campaigns/new`);
+  };
+
   return (
     <div>
       <h1>This is the campaign list page</h1>
       <h3>Open Campaigns</h3>
+      <CampaingAdd description="Create Campaign" onClick={handleAddCampaign} />
       <CampaignList campaigns={campaigns} />
-      <CampaingAdd description="Create Campaign" />
     </div>
   );
 };
