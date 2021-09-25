@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import factory from '../ethereum/factory';
 import CampaignList from '../components/CampaignList';
 import CampaingAdd from '../components/CampaignAdd';
 import Campaign from '../model/Campaign';
 import withLayout from '../components/hoc/withLayout';
+import { getCampaignsHandler } from '../ethereum/factoryHandlers';
 
 interface Props {}
 
@@ -15,7 +15,7 @@ const IndexPage = (props: Props) => {
 
   useEffect(() => {
     const getCampaigns = async () => {
-      const items = await factory.methods.getDeployedCampaigns().call();
+      const items = await getCampaignsHandler();
 
       const campaigns = items.map((item: string) => {
         return {

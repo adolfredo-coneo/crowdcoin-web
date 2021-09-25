@@ -4,4 +4,10 @@ interface Campaign {
   header: string;
 }
 
+export interface ResponseCampaign {
+  result: 'success' | 'error';
+  campaign: Campaign | null;
+  message: string;
+}
+
 export default Campaign;
