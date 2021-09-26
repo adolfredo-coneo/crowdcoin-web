@@ -8,13 +8,17 @@ const Header = () => {
   return (
     <div className={classes.header}>
       <Menu>
-        <Menu.Item name="home">
-          <Link to="/">CrowdCoin</Link>
-        </Menu.Item>
+        <Link className="item" to="/">
+          CrowdCoin
+        </Link>
 
         <Menu.Menu position="right">
-          <Menu.Item name="campaigns">Campaigns</Menu.Item>
-          <Menu.Item name="create-campaign">+</Menu.Item>
+          <Link className="item" to="/">
+            Campaigns
+          </Link>
+          <Link className="item" to="/campaigns/new">
+            +
+          </Link>
         </Menu.Menu>
       </Menu>
     </div>

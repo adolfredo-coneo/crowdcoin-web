@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import CampaignList from '../components/CampaignList';
 import CampaingAdd from '../components/CampaignAdd';
@@ -17,11 +18,13 @@ const IndexPage = (props: Props) => {
     const getCampaigns = async () => {
       const items = await getCampaignsHandler();
 
-      const campaigns = items.map((item: string) => {
+      const campaigns = items.map((adddress: string) => {
         return {
-          id: item,
-          header: item,
-          description: <a href="https://localhost">View the campaign</a>,
+          id: adddress,
+          header: adddress,
+          description: (
+            <Link to={`/campaigns/${adddress}`}>View the campaign</Link>
+          ),
           fluid: true,
         };
       });

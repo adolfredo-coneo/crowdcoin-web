@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import IndexPageWithLayout from './pages/IndexPage';
 import NewCampaignPageWithLayout from './pages/campaigns/NewCampaignPage';
+import ViewCampaignPageWithLayout from './pages/campaigns/ViewCampaignPage';
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
             <Route
               path="/campaigns/new"
               component={NewCampaignPageWithLayout}
+              exact
+            />
+            <Route
+              path="/campaigns/:address"
+              component={ViewCampaignPageWithLayout}
               exact
             />
           </Switch>
