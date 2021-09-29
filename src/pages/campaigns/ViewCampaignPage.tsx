@@ -10,7 +10,11 @@ interface Props {
 export const ViewCampaignPage: React.FC = () => {
   let { address } = useParams<Props>();
 
-  return <div>{address}</div>;
+  return (
+    <div>
+      <h1>This is the campaign {address}</h1>
+    </div>
+  );
 };
 
 const ViewCampaignPageWithLayout = withLayout(ViewCampaignPage);

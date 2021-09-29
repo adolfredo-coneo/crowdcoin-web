@@ -4,7 +4,7 @@ const compiledFactory = require('../ethereum/build/CompaignFactory.json');
 
 const instance = new web3.eth.Contract(
   compiledFactory.abi,
-  process.env.REACT_APP_FACCTORY_ADDRESS
+  process.env.REACT_APP_FACTORY_ADDRESS
 );
 
 export default instance;
