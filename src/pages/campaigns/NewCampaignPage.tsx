@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
 
 import withLayout from '../../components/hoc/withLayout';
-import { createCampaignHandler } from '../../ethereum/factoryHandlers';
+import { createCampaignHandler } from '../../ethereum/handlers/factoryHandlers';
 
 export const NewCampaignPage = () => {
   const [minimumContribution, setMinimumContribution] = useState<string>('');

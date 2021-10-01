@@ -6,7 +6,7 @@ import CampaignList from '../components/CampaignList';
 import CampaingAdd from '../components/CampaignAdd';
 import Campaign from '../model/Campaign';
 import withLayout from '../components/hoc/withLayout';
-import { getCampaignsHandler } from '../ethereum/factoryHandlers';
+import { getCampaignsHandler } from '../ethereum/handlers/factoryHandlers';
 
 interface Props {}
 

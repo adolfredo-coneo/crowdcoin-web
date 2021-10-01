@@ -1,6 +1,6 @@
-import factory from './factory';
-import web3 from './web3';
-import { ResponseCampaign } from '../model/Campaign';
+import factory from '../factory';
+import web3 from '../web3';
+import { ResponseCampaign } from '../../model/Campaign';
 
 export const createCampaignHandler = async (
   minimumContribution: string
