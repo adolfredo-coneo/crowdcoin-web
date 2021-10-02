@@ -12,7 +12,7 @@ export interface ResponseCampaign {
 
 export interface ResponseSummary {
   minimumContribution: number;
-  balance: number;
+  balance: string;
   requestsCount: number;
   approversCount: number;
   manager: string;
