@@ -4,10 +4,13 @@ interface Campaign {
   header: string;
 }
 
-export interface ResponseCampaign {
+export interface Response {
   result: 'success' | 'error';
-  campaign: Campaign | null;
   message: string;
+}
+
+export interface ResponseCampaign extends Response {
+  campaign: Campaign | null;
 }
 
 export interface ResponseSummary {
