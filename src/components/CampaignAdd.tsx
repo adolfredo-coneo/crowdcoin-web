@@ -3,14 +3,25 @@ import { Button } from 'semantic-ui-react';
 
 interface CampaignAddProps {
   description: string;
+  icon?: string;
+  floated?: 'right' | 'left';
   onClick: () => void;
 }
 
-const CampaignAdd: React.FC<CampaignAddProps> = ({ description, onClick}) => {
+const CampaignAdd: React.FC<CampaignAddProps> = ({
+  description,
+  icon,
+  floated = 'right',
+  onClick,
+}) => {
   return (
-    <div>
-      <Button floated="right" content={description} icon="add circle" onClick={onClick} primary />
-    </div>
+    <Button
+      floated={floated}
+      content={description}
+      icon={icon}
+      onClick={onClick}
+      primary
+    />
   );
 };
 

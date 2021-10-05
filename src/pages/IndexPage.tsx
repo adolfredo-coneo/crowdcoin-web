@@ -41,7 +41,7 @@ const IndexPage = (props: Props) => {
     <div>
       <h1>This is the campaign list page</h1>
       <h3>Open Campaigns</h3>
-      <CampaingAdd description="Create Campaign" onClick={handleAddCampaign} />
+      <CampaingAdd description="Create Campaign" onClick={handleAddCampaign} icon="add circle" />
       <CampaignList campaigns={campaigns} />
     </div>
   );
