@@ -36,3 +36,25 @@ export const contributeCampianHandler = async (
     return { result: 'error', message: err.message };
   }
 };
+
+export const createRequest = async (
+  address: string,
+  description: string,
+  amount: string,
+  recipient: string
+): Promise<Response> => {
+  try {
+    const campaign = await getCampaign(address);
+
+    const accounts = await web3.eth.getAccounts();
+    await campaign.methods
+      .createRequest(description, web3.utils.toWei(amount, 'ether'), recipient)
+      .send({
+        from: accounts[0],
+      });
+
+    return { result: 'success', message: 'Request Successfully' };
+  } catch (err: any) {
+    return { result: 'error', message: err.message };
+  }
+};
