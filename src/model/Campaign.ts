@@ -4,6 +4,14 @@ interface Campaign {
   header: string;
 }
 
+export interface Request {
+  description: string;
+  value: string;
+  recipient: string;
+  complete: boolean;
+  approversCount: string;
+}
+
 export interface Response {
   result: 'success' | 'error';
   message: string;
@@ -19,6 +27,10 @@ export interface ResponseSummary {
   requestsCount: number;
   approversCount: number;
   manager: string;
+}
+
+export interface ResponseRequests extends Response {
+  requests: Request[];
 }
 
 export default Campaign;

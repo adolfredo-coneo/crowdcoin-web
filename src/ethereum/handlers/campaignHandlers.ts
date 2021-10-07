@@ -1,4 +1,8 @@
-import { Response, ResponseSummary } from '../../model/Campaign';
+import {
+  Response,
+  ResponseRequests,
+  ResponseSummary,
+} from '../../model/Campaign';
 import getCampaign from '../campaign';
 import web3 from '../web3';
 
@@ -56,5 +60,23 @@ export const createRequest = async (
     return { result: 'success', message: 'Request Successfully' };
   } catch (err: any) {
     return { result: 'error', message: err.message };
+  }
+};
+
+export const getAllRequestsHandler = async (
+  address: string
+): Promise<ResponseRequests> => {
+  try {
+    const campaign = await getCampaign(address);
+
+    const requests = await campaign.methods.getAllRequests().call();
+
+    return {
+      result: 'success',
+      message: '',
+      requests,
+    };
+  } catch (err: any) {
+    return { result: 'error', message: err.message, requests: [] };
   }
 };
