@@ -38,3 +38,6 @@ git remote add origin https://github.com/adolfredo-coneo/crowdcoin-web.git
 git push -u origin main
 
 cd crowdcoin-web
+
+//old contract
+0xAD70d8AE3Cc2C0416Dfc3a286fFa6F8A7b47DAE2

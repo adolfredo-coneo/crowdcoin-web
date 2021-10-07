@@ -31,12 +31,12 @@ contract Compaign {
         address payable recipient;
         bool complete;
         uint256 approvalCount;
-        mapping(address => bool) approvals;
     }
 
     address public manager;
-    mapping(uint256 => Request) public requests;
+    Request[] public requests;
     mapping(address => bool) public approvers;
+    mapping(address => bool) approvals;
     uint256 public approversCount;
     uint256 public minimumContribution;
     uint256 public numRequests;
@@ -52,7 +52,10 @@ contract Compaign {
     }
 
     function contribute() public payable {
-        require(msg.value >= minimumContribution, "Amount sent is less than the minimum contribution limit.");
+        require(
+            msg.value >= minimumContribution,
+            "Amount sent is less than the minimum contribution limit."
+        );
         approvers[msg.sender] = true;
         approversCount++;
     }
@@ -62,24 +65,33 @@ contract Compaign {
         uint256 value,
         address payable recipient
     ) public restricted {
-        require(value <= address(this).balance, "Not enough money to request that amount");
-        
-        Request storage newReq = requests[numRequests++];
+        require(
+            value <= address(this).balance,
+            "Not enough money to request that amount"
+        );
+
+        Request memory newReq;
         newReq.description = description;
         newReq.value = value;
         newReq.recipient = recipient;
         newReq.complete = false;
         newReq.approvalCount = 0;
+
+        numRequests++;
+        requests.push(newReq);
     }
 
     function approveRequest(uint256 index) public {
         Request storage request = requests[index];
 
         require(approvers[msg.sender], "You are not an approver.");
-        require(!request.approvals[msg.sender], "You have already voted on this request.");
+        require(
+            !approvals[msg.sender],
+            "You have already voted on this request."
+        );
         require(!request.complete, "Request was already finalized.");
 
-        request.approvals[msg.sender] = true;
+        approvals[msg.sender] = true;
         request.approvalCount++;
     }
 
@@ -87,13 +99,26 @@ contract Compaign {
         Request storage request = requests[index];
 
         require(!request.complete, "Request was already finalized.");
-        require(request.approvalCount > (approversCount / 2), "Not enough approvals.");
+        require(
+            request.approvalCount > (approversCount / 2),
+            "Not enough approvals."
+        );
 
         request.recipient.transfer(request.value);
         request.complete = true;
     }
 
-    function getSummary() public view returns (uint256, uint256, uint256, uint256, address) {
+    function getSummary()
+        public
+        view
+        returns (
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            address
+        )
+    {
         return (
             minimumContribution,
             address(this).balance,
@@ -105,5 +130,9 @@ contract Compaign {
 
     function getRequestsCount() public view returns (uint256) {
         return numRequests;
+    }
+
+    function getAllRequests() public view returns (Request[] memory) {
+        return requests;
     }
 }
