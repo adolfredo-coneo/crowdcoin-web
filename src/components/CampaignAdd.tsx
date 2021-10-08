@@ -1,11 +1,14 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
+import { SemanticCOLORS } from 'semantic-ui-react/dist/commonjs/generic';
 
 interface CampaignAddProps {
   description: string;
   icon?: string;
   floated?: 'right' | 'left';
+  color?: SemanticCOLORS;
   onClick: () => void;
+  basic?: boolean;
 }
 
 const CampaignAdd: React.FC<CampaignAddProps> = ({
@@ -13,6 +16,8 @@ const CampaignAdd: React.FC<CampaignAddProps> = ({
   icon,
   floated = 'right',
   onClick,
+  color = 'blue',
+  basic,
 }) => {
   return (
     <Button
@@ -20,7 +25,8 @@ const CampaignAdd: React.FC<CampaignAddProps> = ({
       content={description}
       icon={icon}
       onClick={onClick}
-      primary
+      color={color}
+      basic={basic}
     />
   );
 };

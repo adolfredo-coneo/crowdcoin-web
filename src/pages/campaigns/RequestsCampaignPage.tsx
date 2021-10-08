@@ -4,7 +4,11 @@ import { Table } from 'semantic-ui-react';
 
 import withLayout from '../../components/hoc/withLayout';
 import CampaingAdd from '../../components/CampaignAdd';
-import { getAllRequestsHandler } from '../../ethereum/handlers/campaignHandlers';
+import RequestRow from '../../components/RequestRow';
+import {
+  getAllRequestsHandler,
+  getApproversCountHandler,
+} from '../../ethereum/handlers/campaignHandlers';
 import { Request } from '../../model/Campaign';
 
 interface Props {
@@ -16,6 +20,7 @@ export const RequestsCampaignPage: React.FC = () => {
   const history = useHistory();
   const { Header, Row, HeaderCell, Body } = Table;
   const [requests, setRequests] = useState<Request[]>([]);
+  const [approversCount, setApproversCount] = useState<string>('');
 
   const handleCreateRequest = () => {
     history.push(`/campaigns/${address}/requests/new`);
@@ -24,6 +29,8 @@ export const RequestsCampaignPage: React.FC = () => {
   useEffect(() => {
     const getRequests = async () => {
       const response = await getAllRequestsHandler(address);
+      const approvers = await getApproversCountHandler(address);
+      setApproversCount(approvers.message);
 
       if (response.result === 'success') {
         setRequests(response.requests);
@@ -32,6 +39,14 @@ export const RequestsCampaignPage: React.FC = () => {
 
     getRequests();
   }, [address, requests]);
+
+  const handleApproveRequest = (requestId: string) => {
+    console.log(requestId);
+  };
+
+  const handleFinlizeRequest = (requestId: string) => {
+    console.log(requestId);
+  };
 
   return (
     <div>
@@ -57,15 +72,13 @@ export const RequestsCampaignPage: React.FC = () => {
         </Header>
         <Body>
           {requests.map((request, index) => (
-            <Row key={index}>
-              <HeaderCell>{index}</HeaderCell>
-              <HeaderCell>{request.description}</HeaderCell>
-              <HeaderCell>{request.value}</HeaderCell>
-              <HeaderCell>{request.recipient}</HeaderCell>
-              <HeaderCell>{request.approversCount}</HeaderCell>
-              <HeaderCell>Aprovers</HeaderCell>
-              <HeaderCell>Finalize</HeaderCell>
-            </Row>
+            <RequestRow
+              index={index}
+              request={request}
+              handleApprove={handleApproveRequest}
+              handleFinalize={handleFinlizeRequest}
+              approversCount={approversCount}
+            />
           ))}
         </Body>
       </Table>

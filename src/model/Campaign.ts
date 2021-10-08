@@ -9,7 +9,7 @@ export interface Request {
   value: string;
   recipient: string;
   complete: boolean;
-  approversCount: string;
+  approvalCount: string;
 }
 
 export interface Response {

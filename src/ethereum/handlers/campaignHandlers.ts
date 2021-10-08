@@ -80,3 +80,20 @@ export const getAllRequestsHandler = async (
     return { result: 'error', message: err.message, requests: [] };
   }
 };
+
+export const getApproversCountHandler = async (
+  address: string
+): Promise<Response> => {
+  try {
+    const campaign = await getCampaign(address);
+
+    const approversCount = await campaign.methods.approversCount().call();
+
+    return {
+      result: 'success',
+      message: approversCount,
+    };
+  } catch (err: any) {
+    return { result: 'error', message: err.message };
+  }
+};
