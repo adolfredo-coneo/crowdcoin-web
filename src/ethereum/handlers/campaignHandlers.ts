@@ -97,3 +97,39 @@ export const getApproversCountHandler = async (
     return { result: 'error', message: err.message };
   }
 };
+
+export const approveRequestHandler = async (
+  address: string,
+  requestId: string
+): Promise<Response> => {
+  try {
+    const campaign = await getCampaign(address);
+
+    const accounts = await web3.eth.getAccounts();
+    await campaign.methods.approveRequest(requestId).send({
+      from: accounts[0],
+    });
+
+    return { result: 'success', message: 'Request Successfully Approved' };
+  } catch (err: any) {
+    return { result: 'error', message: err.message };
+  }
+};
+
+export const finalizeRequestHandler = async (
+  address: string,
+  requestId: string
+): Promise<Response> => {
+  try {
+    const campaign = await getCampaign(address);
+
+    const accounts = await web3.eth.getAccounts();
+    await campaign.methods.finalizeRequest(requestId).send({
+      from: accounts[0],
+    });
+
+    return { result: 'success', message: 'Request Successfully Finalized' };
+  } catch (err: any) {
+    return { result: 'error', message: err.message };
+  }
+};

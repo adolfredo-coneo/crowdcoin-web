@@ -9,6 +9,7 @@ interface CampaignAddProps {
   color?: SemanticCOLORS;
   onClick: () => void;
   basic?: boolean;
+  loading?: boolean;
 }
 
 const CampaignAdd: React.FC<CampaignAddProps> = ({
@@ -18,6 +19,7 @@ const CampaignAdd: React.FC<CampaignAddProps> = ({
   onClick,
   color = 'blue',
   basic,
+  loading = false,
 }) => {
   return (
     <Button
@@ -27,6 +29,8 @@ const CampaignAdd: React.FC<CampaignAddProps> = ({
       onClick={onClick}
       color={color}
       basic={basic}
+      loading={loading}
+      disabled={loading}
     />
   );
 };

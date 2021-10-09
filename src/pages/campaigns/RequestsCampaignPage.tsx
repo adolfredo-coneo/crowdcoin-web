@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Table } from 'semantic-ui-react';
+import { Message, Table } from 'semantic-ui-react';
 
 import withLayout from '../../components/hoc/withLayout';
 import CampaingAdd from '../../components/CampaignAdd';
 import RequestRow from '../../components/RequestRow';
 import {
+  approveRequestHandler,
+  finalizeRequestHandler,
   getAllRequestsHandler,
   getApproversCountHandler,
 } from '../../ethereum/handlers/campaignHandlers';
@@ -21,6 +23,7 @@ export const RequestsCampaignPage: React.FC = () => {
   const { Header, Row, HeaderCell, Body } = Table;
   const [requests, setRequests] = useState<Request[]>([]);
   const [approversCount, setApproversCount] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
   const handleCreateRequest = () => {
     history.push(`/campaigns/${address}/requests/new`);
@@ -40,12 +43,24 @@ export const RequestsCampaignPage: React.FC = () => {
     getRequests();
   }, [address, requests]);
 
-  const handleApproveRequest = (requestId: string) => {
-    console.log(requestId);
+  const handleApproveRequest = async (requestId: string) => {
+    setMessage('');
+    const response = await approveRequestHandler(address, requestId);
+    if (response.result === 'error') {
+      setMessage(response.message);
+    } else {
+      history.go(0);
+    }
   };
 
-  const handleFinlizeRequest = (requestId: string) => {
-    console.log(requestId);
+  const handleFinlizeRequest = async (requestId: string) => {
+    setMessage('');
+    const response = await finalizeRequestHandler(address, requestId);
+    if (response.result === 'error') {
+      setMessage(response.message);
+    } else {
+      history.go(0);
+    }
   };
 
   return (
@@ -53,11 +68,12 @@ export const RequestsCampaignPage: React.FC = () => {
       <h3>Requests List</h3>
       <CampaingAdd
         description="Add Request"
-        floated="left"
+        floated="right"
         onClick={handleCreateRequest}
       />
       <br />
       <br />
+      {message && <Message error header="Error!" content={message} />}
       <Table>
         <Header>
           <Row>
@@ -73,6 +89,7 @@ export const RequestsCampaignPage: React.FC = () => {
         <Body>
           {requests.map((request, index) => (
             <RequestRow
+              key={index}
               index={index}
               request={request}
               handleApprove={handleApproveRequest}
@@ -82,6 +99,7 @@ export const RequestsCampaignPage: React.FC = () => {
           ))}
         </Body>
       </Table>
+      <h5>Found {requests.length} requests</h5>
     </div>
   );
 };
